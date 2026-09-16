@@ -8655,7 +8655,10 @@ DisplayServerWindows::~DisplayServerWindows() {
 		gl_manager_native = nullptr;
 	}
 #endif
-	memdelete(tts);
+	if (tts) {
+		memdelete(tts);
+		tts = nullptr;
+	}
 
 	OleUninitialize();
 }

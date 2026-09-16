@@ -7624,16 +7624,29 @@ DisplayServerX11::~DisplayServerX11() {
 	XCloseDisplay(x11_display);
 	if (xmbstring) {
 		memfree(xmbstring);
+		xmbstring = nullptr;
 	}
 
 #ifdef SPEECHD_ENABLED
-	memdelete(tts);
+	if (tts) {
+		memdelete(tts);
+		tts = nullptr;
+	}
 #endif
 
 #ifdef DBUS_ENABLED
-	memdelete(screensaver);
-	memdelete(portal_desktop);
-	memdelete(atspi_monitor);
+	if (screensaver) {
+		memdelete(screensaver);
+		screensaver = nullptr;
+	}
+	if (portal_desktop) {
+		memdelete(portal_desktop);
+		portal_desktop = nullptr;
+	}
+	if (atspi_monitor) {
+		memdelete(atspi_monitor);
+		atspi_monitor = nullptr;
+	}
 #endif
 }
 

@@ -2598,18 +2598,36 @@ DisplayServerWayland::~DisplayServerWayland() {
 
 	// Destroy all drivers.
 #ifdef RD_ENABLED
-	memdelete(rendering_device);
-	memdelete(rendering_context);
+	if (rendering_device) {
+		memdelete(rendering_device);
+		rendering_device = nullptr;
+	}
+	if (rendering_context) {
+		memdelete(rendering_context);
+		rendering_context = nullptr;
+	}
 #endif
 
 #ifdef SPEECHD_ENABLED
-	memdelete(tts);
+	if (tts) {
+		memdelete(tts);
+		tts = nullptr;
+	}
 #endif
 
 #ifdef DBUS_ENABLED
-	memdelete(portal_desktop);
-	memdelete(screensaver);
-	memdelete(atspi_monitor);
+	if (portal_desktop) {
+		memdelete(portal_desktop);
+		portal_desktop = nullptr;
+	}
+	if (screensaver) {
+		memdelete(screensaver);
+		screensaver = nullptr;
+	}
+	if (atspi_monitor) {
+		memdelete(atspi_monitor);
+		atspi_monitor = nullptr;
+	}
 #endif
 }
 
