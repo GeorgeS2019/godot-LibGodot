@@ -1,4 +1,4 @@
-name: 🏁 Windows Builds
+name: 🏁 LibGodot Windows Builds
 on:
   workflow_call:
   workflow_dispatch:
